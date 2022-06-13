@@ -15,9 +15,9 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-        <UserLoginTemplate exact path={'/login'} component={Login} />
-        <HomeTemplate exact path={'/register'} component={Register} />
-        <HomeTemplate exact path="/" component={HomePage} />
+        <UserLoginTemplate exact path={'/login'} Component={Login} />
+        <HomeTemplate exact path={'/register'} Component={Register} />
+        <HomeTemplate exact path="/" Component={HomePage} />
       </Switch>
     </Router>
   );
