@@ -9,7 +9,7 @@ export const UserLoginTemplate = (propsRoute) => {
     return <Route {...restRoute} render={(propsRoute) => {
         return <>
             <Layout>
-                <Sider style={{ height: window.innerHeight, backgroundImage:'url(https://picsum.photos/500)'}}>
+                <Sider width={window.innerWidth / 2} style={{ height: window.innerHeight, backgroundImage: 'url(https://picsum.photos/2000)', backgroundSize: "100%" }}>
                     <h3 className='bg-danger'>sider ở chỗ này</h3>
                 </Sider>
                 <Content>
