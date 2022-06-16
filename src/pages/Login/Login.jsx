@@ -4,6 +4,8 @@ import { Col, Row, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined, FacebookOutlined, TwitterOutlined, YoutubeOutlined } from '@ant-design/icons';
 import { withFormik, Formik } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux'
+import { USER_SIGNIN_API } from '../../redux/constants/JiraFinal'
 
 function Login(props) {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, } = props;
@@ -45,7 +47,7 @@ const LoginJiraWithFormik = withFormik({
   }),
   // validationSchema là phần xét lỗi, phạm lỗi nào sẽ hiện thông báo lỗi thông qua thuộc tính errors
   validationSchema: Yup.object().shape({
-    userName: Yup.string().required('Username is required!'),
+    userName: Yup.string().required('Username is required!').email('Email is invalid'),
     password: Yup.string().min(6, 'Password too short, must be at least 6 character').max(32, 'Password must not be over 32 character').required('Password must be fill'),
   }),
 
@@ -53,11 +55,23 @@ const LoginJiraWithFormik = withFormik({
   handleChange: e => {
     console.log(e)
   },
-  handleSubmit: (values, { setSubmitting }) => {
+  handleSubmit: (values, { props, setSubmitting }) => {
+    let action = {
+      type: USER_SIGNIN_API,
+      useLogin: {
+        userName: values.userName,
+        password: values.password
+      }
+    }
+    props.dispatch(action)
+
+    console.log(props.dispatch(action))
+    console.log("props: ", props);
     console.log(values);
   },
 
   displayName: 'Login Page',
 })(Login);
 
-export default LoginJiraWithFormik;
+//conect bọc ngoài component nào thì component đó sẽ có props của redux
+export default connect()(LoginJiraWithFormik);
