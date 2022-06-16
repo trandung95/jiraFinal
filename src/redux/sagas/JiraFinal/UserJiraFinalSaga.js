@@ -3,9 +3,9 @@ import { call, delay, fork, take, takeEvery, takeLates, put } from 'redux-saga/e
 import { USER_SIGNIN_API } from '../../constants/JiraFinal';
 
 //quản lý action saga
-function* signinSaga(action) {
+function * signinSaga(action) {
     console.log(action);
 }
-export function* theoDoiSignin() {
+export function * theoDoiSignin() {
     yield takeLates(USER_SIGNIN_API, signinSaga);
 }

@@ -5,7 +5,8 @@ import { UserOutlined, LockOutlined, FacebookOutlined, TwitterOutlined, YoutubeO
 import { withFormik, Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux'
-import { USER_SIGNIN_API } from '../../redux/constants/JiraFinal'
+import { signInJiraFinalAction } from '../../redux/actions/JiraFinalAction';
+
 
 function Login(props) {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, } = props;
@@ -56,22 +57,21 @@ const LoginJiraWithFormik = withFormik({
     console.log(e)
   },
   handleSubmit: (values, { props, setSubmitting }) => {
-    let action = {
-      type: USER_SIGNIN_API,
-      useLogin: {
-        userName: values.userName,
-        password: values.password
-      }
-    }
-    props.dispatch(action)
-
-    console.log(props.dispatch(action))
-    console.log("props: ", props);
-    console.log(values);
+    // let action = {
+    //   type: USER_SIGNIN_API,
+    //   userLogin: {
+    //     userName: values.userName,
+    //     password: values.password
+    //   }
+    // }
+    props.dispatch(signInJiraFinalAction(values.userName, values.password));
+    
+    // console.log("props: ", props);
+    // console.log(values);
   },
 
-  displayName: 'Login Page',
-})(Login);
+displayName: 'Login Page',
+}) (Login);
 
 //conect bọc ngoài component nào thì component đó sẽ có props của redux
 export default connect()(LoginJiraWithFormik);
